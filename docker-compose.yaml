@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: node_app
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm start
+
+  redis:
+    image: redis/redis-stack:latest
+    container_name: redisP02
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - /home/alejandro-aaron-cabral-machuca/Documentos/redis_data:/data
