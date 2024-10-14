@@ -1,0 +1,176 @@
+**Iniciamos con el contenedor**
+sudo  docker run -d \
+   --name redis02 \
+   -p 6379:6379 -p 8001:8001 \
+   -v /home/alejandro-aaron-cabral-machuca/Documentos/redis_data:/data \
+   redis/redis-stack:latest
+   
+   ```
+      http://localhost:8001
+    ``
+    
+##PRODUCTOS:##
+MULTI
+HSET producto:ps001:sucursal:001 nombre "Cemento Portland" precio 7.50 categoria "Materiales de Construcción" datos_adicionales "Bolsa de 50 kg"
+
+HSET producto:ps002:sucursal:001 nombre "Ladrillos Cerámicos" precio 0.50 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 20x10x5 cm"
+
+HSET producto:ps003:sucursal:001 nombre "Arena Gruesa" precio 4.00 categoria "Materiales de Construcción" datos_adicionales "Saco de 1 m³"
+
+HSET producto:ps004:sucursal:001 nombre "Grava" precio 5.00 categoria "Materiales de Construcción" datos_adicionales "Saco de 1 m³"
+
+HSET producto:ps005:sucursal:002 nombre "Cemento Blanco" precio 8.00 categoria "Materiales de Construcción" datos_adicionales "Bolsa de 25 kg"
+
+HSET producto:ps006:sucursal:002 nombre "Placas de Yeso" precio 12.00 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 2.4x1.2 m"
+
+HSET producto:ps007:sucursal:002 nombre "Hormigón" precio 10.00 categoria "Materiales de Construcción" datos_adicionales "Saco de 50 kg"
+HSET producto:ps008:sucursal:002 nombre "Mortero" precio 6.50 categoria "Materiales de Construcción" datos_adicionales "Bolsa de 40 kg"
+
+HSET producto:ps009:sucursal:003 nombre "Piedra Pómez" precio 3.00 categoria "Materiales de Construcción" datos_adicionales "Saco de 1 m³"
+HSET producto:ps010:sucursal:003 nombre "Tuberías de PVC" precio 2.00 categoria "Materiales de Construcción" datos_adicionales "Diámetro: 2 pulgadas"
+HSET producto:ps011:sucursal:003 nombre "Tablas de Madera" precio 15.00 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 2.4x0.1 m"
+HSET producto:ps012:sucursal:003 nombre "Tejas" precio 1.20 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 30x20 cm"
+
+HSET producto:ps013:sucursal:004 nombre "Cemento para Pegamento" precio 9.00 categoria "Materiales de Construcción" datos_adicionales "Bolsa de 25 kg"
+HSET producto:ps014:sucursal:004 nombre "Adhesivo para Cerámica" precio 7.00 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 20 kg"
+HSET producto:ps015:sucursal:004 nombre "Cal Hidratada" precio 5.50 categoria "Materiales de Construcción" datos_adicionales "Saco de 25 kg"
+HSET producto:ps016:sucursal:004 nombre "Alambre de Púas" precio 20.00 categoria "Materiales de Construcción" datos_adicionales "Rollos de 100 m"
+
+HSET producto:ps017:sucursal:005 nombre "Cemento Especial" precio 11.00 categoria "Materiales de Construcción" datos_adicionales "Bolsa de 50 kg"
+HSET producto:ps018:sucursal:005 nombre "Placas de Poliestireno" precio 18.00 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 2.4x1.2 m"
+HSET producto:ps019:sucursal:005 nombre "Paneles de Yeso" precio 14.00 categoria "Materiales de Construcción" datos_adicionales "Tamaño: 1.2x2.4 m"
+HSET producto:ps020:sucursal:005 nombre "Cinta Aislante" precio 1.50 categoria "Materiales de Construcción" datos_adicionales "Rollos de 20 m"
+EXEC
+
+##CLIENTES:##
+
+MULTI
+SADD clientes "cliente:ABC123:nombre:'Juan Perez'"
+SADD clientes "cliente:DEF456:nombre:'Maria Lopez'"
+SADD clientes "cliente:GHI789:nombre:'Carlos Sanchez'"
+SADD clientes "cliente:JKL012:nombre:'Ana Garcia'"
+SADD clientes "cliente:MNO345:nombre:'Luis Fernández'"
+SADD clientes "cliente:XYZ001:nombre:'Laura Martinez'"
+SADD clientes "cliente:XYZ002:nombre:'Jorge Ramirez'"
+SADD clientes "cliente:XYZ003:nombre:'Sofia Herrera'"
+SADD clientes "cliente:XYZ004:nombre:'Miguel Torres'"
+SADD clientes "cliente:XYZ005:nombre:'Claudia Jimenez'"
+SADD clientes "cliente:XYZ006:nombre:'Andres Morales'"
+SADD clientes "cliente:XYZ007:nombre:'Patricia Castro'"
+SADD clientes "cliente:XYZ008:nombre:'Fernando Ortega'"
+SADD clientes "cliente:XYZ009:nombre:'Natalia Ruiz'"
+SADD clientes "cliente:XYZ010:nombre:'Eduardo Salazar'"
+SADD clientes "cliente:XYZ011:nombre:'Veronica Medina'"
+SADD clientes "cliente:XYZ012:nombre:'Cristian Vega'"
+SADD clientes "cliente:XYZ013:nombre:'Gabriela Soto'"
+SADD clientes "cliente:XYZ014:nombre:'Diego Mendoza'"
+SADD clientes "cliente:XYZ015:nombre:'Isabel Paredes'"
+EXEC
+
+
+##VENTAS:##
+MULTI
+RPUSH sucursal:001:ventas:1234421 "VENTA:1234421:PRODUCTO:ps001:CANTIDAD:4:COSTO_UNITARIO:60:TOTAL:240:cliente:ABC123:SUCURSAL:001:FECHA:20240922:HORA:123456"
+RPUSH sucursal:001:ventas:1234422 "VENTA:1234422:PRODUCTO:ps002:CANTIDAD:4:COSTO_UNITARIO:70:TOTAL:280:cliente:DEF456:SUCURSAL:001:FECHA:20240922:HORA:123457"
+RPUSH sucursal:001:ventas:1234423 "VENTA:1234423:PRODUCTO:ps003:CANTIDAD:1:COSTO_UNITARIO:60:TOTAL:60:cliente:GHI789:SUCURSAL:001:FECHA:20240922:HORA:123458"
+RPUSH sucursal:001:ventas:1234424 "VENTA:1234424:PRODUCTO:ps004:CANTIDAD:4:COSTO_UNITARIO:60:TOTAL:240:cliente:JKL012:SUCURSAL:001:FECHA:20240922:HORA:123459"
+RPUSH sucursal:002:ventas:1234425 "VENTA:1234425:PRODUCTO:ps005:CANTIDAD:159:COSTO_UNITARIO:60:TOTAL:240:cliente:MNO345:SUCURSAL:002:FECHA:20240921:HORA:123456"
+RPUSH sucursal:002:ventas:1234426 "VENTA:1234426:PRODUCTO:ps006:CANTIDAD:100:COSTO_UNITARIO:60:TOTAL:240:cliente:MNO345:SUCURSAL:002:FECHA:20240922:HORA:123456"
+RPUSH sucursal:002:ventas:1234427 "VENTA:1234427:PRODUCTO:ps006:CANTIDAD:12:COSTO_UNITARIO:60:TOTAL:240:cliente:XYZ001:SUCURSAL:002:FECHA:20240922:HORA:123459"
+RPUSH sucursal:002:ventas:1234428 "VENTA:1234428:PRODUCTO:ps007:CANTIDAD:12:COSTO_UNITARIO:60:TOTAL:240:cliente:XYZ001:SUCURSAL:002:FECHA:20240923:HORA:123459"
+RPUSH sucursal:003:ventas:0011124 "VENTA:0011124:PRODUCTO:ps008:CANTIDAD:12:COSTO_UNITARIO:60:TOTAL:720:cliente:XYZ002:SUCURSAL:003:FECHA:20240921:HORA:123456"
+RPUSH sucursal:003:ventas:0021123 "VENTA:0021123:PRODUCTO:ps009:CANTIDAD:12:COSTO_UNITARIO:70:TOTAL:840:cliente:XYZ003:SUCURSAL:003:FECHA:20240922:HORA:123457"
+RPUSH sucursal:003:ventas:0031344 "VENTA:0031344:PRODUCTO:ps010:CANTIDAD:12:COSTO_UNITARIO:80:TOTAL:960:cliente:XYZ004:SUCURSAL:003:FECHA:20240922:HORA:123459"
+RPUSH sucursal:003:ventas:0041237 "VENTA:0041237:PRODUCTO:ps011:CANTIDAD:12:COSTO_UNITARIO:90:TOTAL:1080:cliente:XYZ015:SUCURSAL:003:FECHA:20240923:HORA:123456"
+RPUSH sucursal:004:ventas:0056789 "VENTA:0056789:PRODUCTO:ps012:CANTIDAD:12:COSTO_UNITARIO:60:TOTAL:720:cliente:XYZ005:SUCURSAL:004:FECHA:20240921:HORA:123456"
+RPUSH sucursal:004:ventas:0069702 "VENTA:0069702:PRODUCTO:ps013:CANTIDAD:12:COSTO_UNITARIO:70:TOTAL:840:cliente:XYZ014:SUCURSAL:004:FECHA:20240921:HORA:123459"
+RPUSH sucursal:004:ventas:0072410 "VENTA:0072410:PRODUCTO:ps014:CANTIDAD:12:COSTO_UNITARIO:80:TOTAL:960:cliente:XYZ006:SUCURSAL:004:FECHA:20240922:HORA:123456"
+RPUSH sucursal:004:ventas:0084745 "VENTA:0084745:PRODUCTO:ps015:CANTIDAD:12:COSTO_UNITARIO:90:TOTAL:1080:cliente:XYZ007:SUCURSAL:004:FECHA:20240923:HORA:123456"
+RPUSH sucursal:005:ventas:0099163 "VENTA:0099163:PRODUCTO:ps016:CANTIDAD:12:COSTO_UNITARIO:60:TOTAL:720:cliente:XYZ008:SUCURSAL:005:FECHA:20240921:HORA:123450"
+RPUSH sucursal:005:ventas:0108154 "VENTA:0108154:PRODUCTO:ps017:CANTIDAD:12:COSTO_UNITARIO:70:TOTAL:840:cliente:XYZ009:SUCURSAL:005:FECHA:20240921:HORA:123454"
+RPUSH sucursal:005:ventas:0119621 "VENTA:0119621:PRODUCTO:ps018:CANTIDAD:12:COSTO_UNITARIO:80:TOTAL:960:cliente:XYZ010:SUCURSAL:005:FECHA:20240922:HORA:123450"
+RPUSH sucursal:005:ventas:0129622 "VENTA:0129622:PRODUCTO:ps019:CANTIDAD:12:COSTO_UNITARIO:90:TOTAL:1080:cliente:XYZ011:SUCURSAL:005:FECHA:20240922:HORA:123455"
+RPUSH sucursal:005:ventas:0139623 "VENTA:0139623:PRODUCTO:ps020:CANTIDAD:12:COSTO_UNITARIO:60:TOTAL:720:cliente:XYZ012:SUCURSAL:005:FECHA:20240923:HORA:123450"
+EXEC
+
+
+##SUCURSAL:##
+MULTI
+HMSET sucursal:001 idsucursal "001" nombre "Central" ubicacion "Av. Mexico Nte 123, Tepic" latitud "21.511812" longitud "-104.892312"
+
+HMSET sucursal:002 idsucursal "002" nombre "Norte" ubicacion "Cam. Viejo a Puga 234, Tepic" latitud "21.535614" longitud "-104.876134"
+
+HMSET sucursal:003 idsucursal "003" nombre "Sur" ubicacion "Blv. Tepic-Xalisco 678, Tepic" latitud "21.493867" longitud "-104.896527"
+
+HMSET sucursal:004 idsucursal "004" nombre "Este" ubicacion "Blv. LUis Donaldo COlosio 345, Tepic" latitud "21.502240" longitud "-104.875223"
+
+HMSET sucursal:005 idsucursal "005" nombre "Oeste" ubicacion "Av. Del Ejercito 612, Tepic" latitud "21.500277" longitud "-104.901607"
+EXEC
+
+GEO:
+
+# Agregar sucursales con el orden correcto: longitud primero, luego latitud
+GEOADD sucursal -104.892312 21.511812 "sucursal:001"  
+GEOADD sucursal -104.876134 21.535614 "sucursal:002"  
+GEOADD sucursal -104.896527 21.493867 "sucursal:003"  
+GEOADD sucursal -104.875223 21.502240 "sucursal:004"  
+GEOADD sucursal -104.901607 21.500277 "sucursal:005"  
+    
+##SUCURSAL-CLIENTE:##
+MULTI
+SADD sucursal:001:clientes "cliente:ABC123:rfc:'ABC123':nombre:'Juan Perez'"
+SADD sucursal:001:clientes "cliente:DEF456:rfc:'DEF456':nombre:'Maria Lopez'"
+SADD sucursal:001:clientes "cliente:GHI789:rfc:'GHI789':nombre:'Carlos Sanchez'"
+SADD sucursal:001:clientes "cliente:JKL012:rfc:'JKL012':nombre:'Ana Garcia'"
+SADD sucursal:002:clientes "cliente:MNO345:rfc:'MNO345':nombre:'Luis Fernández'"
+SADD sucursal:002:clientes "cliente:XYZ001:rfc:'XYZ001':nombre:'Laura Martinez'"
+SADD sucursal:002:clientes "cliente:XYZ002:rfc:'XYZ002':nombre:'Jorge Ramirez'"
+SADD sucursal:002:clientes "cliente:XYZ003:rfc:'XYZ003':nombre:'Sofia Herrera'"
+SADD sucursal:003:clientes "cliente:XYZ004:rfc:'XYZ004':nombre:'Miguel Torres'"
+SADD sucursal:003:clientes "cliente:XYZ015:rfc:'XYZ015':nombre:'Isabel Paredes'"
+SADD sucursal:003:clientes "cliente:XYZ005:rfc:'XYZ005':nombre:'Claudia Jimenez'"
+SADD sucursal:003:clientes "cliente:XYZ014:rfc:'XYZ014':nombre:'Diego Mendoza'"
+SADD sucursal:004:clientes "cliente:XYZ006:rfc:'XYZ006':nombre:'Andres Morales'"
+SADD sucursal:004:clientes "cliente:XYZ007:rfc:'XYZ007':nombre:'Patricia Castro'"
+SADD sucursal:004:clientes "cliente:XYZ008:rfc:'XYZ008':nombre:'Fernando Ortega'"
+SADD sucursal:004:clientes "cliente:XYZ009:rfc:'XYZ009':nombre:'Natalia Ruiz'"
+SADD sucursal:005:clientes "cliente:XYZ010:rfc:'XYZ010':nombre:'Eduardo Salazar'"
+SADD sucursal:005:clientes "cliente:XYZ011:rfc:'XYZ011':nombre:'Veronica Medina'"
+SADD sucursal:005:clientes "cliente:XYZ012:rfc:'XYZ012':nombre:'Cristian Vega'"
+SADD sucursal:005:clientes "cliente:XYZ013:rfc:'XYZ013':nombre:'Gabriela Soto'"
+EXEC
+
+## Q1. Obtener los detalles de un producto dado su ID.
+HGETALL producto:ps001:sucursal:001
+
+## Q2. Añadir un nuevo cliente al conjunto de clientes de una sucursal y verificar que no exista previamente
+
+exists cliente:XYZ016
+exists sucursal:001
+SISMEMBER sucursal:001:cliente "XYZ016"
+SADD sucursal:001:cliente "XYZ16"
+
+##Q3.  Registrar una nueva venta para un cliente en específico.
+exists sucursal:001
+exists cliente:XYZ11
+exists producto:PS003
+RPUSH sucursal:001:ventas:2024 "VENTA:20001:PRODUCTO:ps002:CANTIDAD:4:COSTO_UNITARIO:60:TOTAL:240:CLIENTE:RFC23456:SUCURSAL:001:FECHA:20240925:HORA:123500"
+
+##Q4. Buscar sucursales cercanas a una ubicación geográfica específica usando consultas geoespaciales.
+GEORADIUS sucursal -104.892315 21.511813 100 km WITHDIST
+
+##Q5. Obtener el conjunto de clientes que han comprado en una sucursal específica.
+SMEMBERS sucursal:001:cliente
+
+##Q6. Registro histórico de los clientes que han hecho compras en cada sucursal
+SMEMBERS sucursal:001:clientes
+SMEMBERS sucursal:002:clientes
+SMEMBERS sucursal:003:clientes
+SMEMBERS sucursal:005:clientes
+SMEMBERS sucursal:006:clientes
+
+
+sudo docker login
+sudo docker push alaacabralma
+sudo docker push alaacabralma/01_redis_api_app
+sudo docker pull alaacabralma/01_redis_api_app
